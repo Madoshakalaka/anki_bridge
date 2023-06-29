@@ -70,7 +70,7 @@ AnkiBridge is an ongoing project with planned future developments. Here are the 
 - [ ] Model Actions
 - [ ] Note Actions
 - [ ] Statistic Actions
-- [ ] [ureq](https://github.com/algesten/ureq) synchronous HTTP client
+- [X] [ureq](https://github.com/algesten/ureq) synchronous HTTP client
 - [ ] [reqwest](https://github.com/seanmonstar/reqwest) asynchronous HTTP client
 - [ ] Tests
 
