@@ -1,0 +1,31 @@
+default:
+  image: "rust:latest" 
+
+stages:
+  - check
+  - test
+
+format:
+  stage: check
+  before_script:
+    - rustup component add rustfmt
+  script:
+    - cargo fmt -- --check
+
+license:
+  stage: check
+  script:
+    - ./utils/license-check.sh
+
+lint:
+  stage: check
+  before_script:
+    - rustup component add clippy
+  script:
+    - cargo clippy --features ureq -- -D warnings
+
+testing:
+  stage: test
+  needs: ["format", "license", "lint"]
+  script:
+    - cargo test --features ureq --verbose
