@@ -78,7 +78,7 @@ Contributions to AnkiBridge are welcome. Feel free to contribute by opening issu
 
 ## License
 
-AnkiBridge is distributed under the [MIT License](https://opensource.org/licenses/MIT). For more information, see the [LICENSE](https://github.com/your_username/anki_connect/blob/main/LICENSE) file.
+AnkiBridge is distributed under the [MIT License](https://opensource.org/licenses/MIT). For more information, see the [LICENSE](https://gitlab.com/kerkmann/anki_bridge/blob/main/LICENSE) file.
 
 ## Contact
 
