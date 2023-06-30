@@ -22,6 +22,8 @@
 * SOFTWARE.
 */
 
+use std::collections::HashMap;
+
 use serde::{Deserialize, Serialize};
 
 use crate::{anki_connect_send, Result};
@@ -236,7 +238,7 @@ pub struct CardsInfo {
     /// The order of the fields.
     pub field_order: usize,
     /// The fields of the card.
-    pub fields: CardsInfoField,
+    pub fields: HashMap<String, CardsInfoField>,
     /// The CSS style applied to the card.
     pub css: String,
     /// The ID of the card.
@@ -265,20 +267,9 @@ pub struct CardsInfo {
     pub mod_: usize,
 }
 
-/// Represents the fields of a card.
-#[derive(Default, Debug, Clone, PartialEq, Deserialize)]
-pub struct CardsInfoField {
-    /// The front side of the card.
-    #[serde(rename = "Front")]
-    pub front: CardsInfoFacade,
-    /// The back side of the card.
-    #[serde(rename = "Back")]
-    pub back: CardsInfoFacade,
-}
-
 /// Represents the facade of a card.
 #[derive(Default, Debug, Clone, PartialEq, Deserialize)]
-pub struct CardsInfoFacade {
+pub struct CardsInfoField {
     /// The value of the facade.
     pub value: String,
     /// The order of the facade.
