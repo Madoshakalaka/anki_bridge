@@ -25,8 +25,11 @@
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use thiserror::Error;
 
-#[cfg(not(any(feature = "ureq")))]
-compile_error!("Please include at least one of the following client features: 'ureq'");
+#[cfg(not(any(feature = "reqwest", feature = "ureq")))]
+compile_error!("Please include EXACTLY ONE of the following client features: 'reqwest', 'ureq'");
+
+#[cfg(all(feature = "reqwest", feature = "ureq"))]
+compile_error!("Please include ONLY ONE of the following client features: 'reqwest', 'ureq'");
 
 /// Module containing card-related actions for AnkiConnect.
 pub mod card_actions;
@@ -36,6 +39,11 @@ pub mod deck_actions;
 /// Represents the possible errors that can occur during the execution of the `anki_connect_send` function.
 #[derive(Debug, Error)]
 pub enum Error {
+    #[cfg(feature = "reqwest")]
+    /// Error indicating a failure in sending the request with `reqwest`.
+    #[error("send request with reqwest failed")]
+    Reqwest(#[from] reqwest::Error),
+
     #[cfg(feature = "ureq")]
     /// Error indicating a failure in sending the request with `ureq`.
     #[error("send request with ureq failed")]
@@ -106,8 +114,20 @@ fn anki_connect_send<P: Serialize, R: DeserializeOwned + Default>(
         params,
     };
 
+    #[cfg(feature = "reqwest")]
+    let response: AnkiConnectResponse<R> = {
+        let client = reqwest::blocking::Client::new();
+        client
+            .post("http://localhost:8765")
+            .json(&data)
+            .send()
+            .map_err(|error| Error::Reqwest(error))?
+            .json::<AnkiConnectResponse<R>>()
+            .map_err(|error| Error::Reqwest(error))
+    }?;
+
     #[cfg(feature = "ureq")]
-    let response = ureq::post("http://localhost:8765")
+    let response: AnkiConnectResponse<R> = ureq::post("http://localhost:8765")
         .send_json(data)
         .map_err(|error| Error::Ureq(Box::new(error)))?
         .into_json::<AnkiConnectResponse<R>>()?;
