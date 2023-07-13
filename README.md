@@ -60,18 +60,16 @@ fn main() {
 
 AnkiBridge is an ongoing project with planned future developments. Here are the upcoming items on the to-do list:
 
-- [x] Card Actions (implementation)
-- [ ] Card Actions (tests)
-- [x] Deck Actions (implementation)
-- [ ] Deck Actions (tests)
-- [ ] Graphical Actions
+- [x] Card Actions
+- [x] Deck Actions
+- [X] Graphical Actions
 - [ ] Media Actions
 - [ ] Miscellaneous Actions
 - [ ] Model Actions
 - [ ] Note Actions
 - [ ] Statistic Actions
 - [X] [ureq](https://github.com/algesten/ureq) synchronous HTTP client
-- [ ] [reqwest](https://github.com/seanmonstar/reqwest) asynchronous HTTP client
+- [X] [reqwest](https://github.com/seanmonstar/reqwest) asynchronous HTTP client
 - [ ] Tests
 
 Contributions to AnkiBridge are welcome. Feel free to contribute by opening issues or submitting pull requests on the [GitLab repository](https://gitlab.com/kerkmann/anki_bridge).
