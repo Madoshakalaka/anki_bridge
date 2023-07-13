@@ -22,7 +22,11 @@
 * SOFTWARE.
 */
 
-#[cfg(not(any(feature = "reqwest_async", feature = "reqwest_blocking", feature = "ureq_blocking")))]
+#[cfg(not(any(
+    feature = "reqwest_async",
+    feature = "reqwest_blocking",
+    feature = "ureq_blocking"
+)))]
 compile_error!("Please include EXACTLY ONE of the following client features: 'reqwest_async', 'reqwest_blocking' or 'ureq_blocking'");
 
 #[cfg(any(
@@ -32,20 +36,40 @@ compile_error!("Please include EXACTLY ONE of the following client features: 're
 ))]
 compile_error!("Please include ONLY ONE of the following client features: 'reqwest_async', 'reqwest_blocking' or 'ureq_blocking'");
 
-#[cfg(any(feature = "reqwest_async", feature = "reqwest_blocking", feature = "ureq_blocking"))]
+#[cfg(any(
+    feature = "reqwest_async",
+    feature = "reqwest_blocking",
+    feature = "ureq_blocking"
+))]
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
-#[cfg(any(feature = "reqwest_async", feature = "reqwest_blocking", feature = "ureq_blocking"))]
+#[cfg(any(
+    feature = "reqwest_async",
+    feature = "reqwest_blocking",
+    feature = "ureq_blocking"
+))]
 use thiserror::Error;
 
 /// Module containing card-related actions for AnkiConnect.
-#[cfg(any(feature = "reqwest_async", feature = "reqwest_blocking", feature = "ureq_blocking"))]
+#[cfg(any(
+    feature = "reqwest_async",
+    feature = "reqwest_blocking",
+    feature = "ureq_blocking"
+))]
 pub mod card_actions;
 /// Module containing deck-related actions for AnkiConnect.
-#[cfg(any(feature = "reqwest_async", feature = "reqwest_blocking", feature = "ureq_blocking"))]
+#[cfg(any(
+    feature = "reqwest_async",
+    feature = "reqwest_blocking",
+    feature = "ureq_blocking"
+))]
 pub mod deck_actions;
 
 /// Represents the possible errors that can occur during the execution of the `anki_connect_send` function.
-#[cfg(any(feature = "reqwest_async", feature = "reqwest_blocking", feature = "ureq_blocking"))]
+#[cfg(any(
+    feature = "reqwest_async",
+    feature = "reqwest_blocking",
+    feature = "ureq_blocking"
+))]
 #[derive(Debug, Error)]
 pub enum Error {
     #[cfg(any(feature = "reqwest_async", feature = "reqwest_blocking"))]
@@ -70,11 +94,19 @@ pub enum Error {
 /// A specialized `Result` type used in the context of AnkiConnect requests.
 ///
 /// It represents either a successful result of type `R` or an error of type `Error`.
-#[cfg(any(feature = "reqwest_async", feature = "reqwest_blocking", feature = "ureq_blocking"))]
+#[cfg(any(
+    feature = "reqwest_async",
+    feature = "reqwest_blocking",
+    feature = "ureq_blocking"
+))]
 type Result<R> = std::result::Result<R, Error>;
 
 /// Represents a request to be sent to AnkiConnect API.
-#[cfg(any(feature = "reqwest_async", feature = "reqwest_blocking", feature = "ureq_blocking"))]
+#[cfg(any(
+    feature = "reqwest_async",
+    feature = "reqwest_blocking",
+    feature = "ureq_blocking"
+))]
 #[derive(Debug, Serialize)]
 struct AnkiConnectRequest<'a, P: Serialize> {
     /// The action to perform in the AnkiConnect API.
@@ -89,7 +121,11 @@ struct AnkiConnectRequest<'a, P: Serialize> {
 }
 
 /// Represents a response received from AnkiConnect API.
-#[cfg(any(feature = "reqwest_async", feature = "reqwest_blocking", feature = "ureq_blocking"))]
+#[cfg(any(
+    feature = "reqwest_async",
+    feature = "reqwest_blocking",
+    feature = "ureq_blocking"
+))]
 #[derive(Debug, Deserialize)]
 struct AnkiConnectResponse<R> {
     /// The result of the API call, if any.
@@ -116,7 +152,11 @@ struct AnkiConnectResponse<R> {
 ///
 /// Returns a `Result` containing the deserialized response `R` if the request was successful,
 /// or an `Error` if there was an error in the request or response.
-#[cfg(any(feature = "reqwest_async", feature = "reqwest_blocking", feature = "ureq_blocking"))]
+#[cfg(any(
+    feature = "reqwest_async",
+    feature = "reqwest_blocking",
+    feature = "ureq_blocking"
+))]
 #[maybe_async::maybe_async]
 async fn anki_connect_send<P: Serialize, R: DeserializeOwned + Default>(
     action: &str,
