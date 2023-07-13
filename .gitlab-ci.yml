@@ -3,6 +3,7 @@ default:
 
 stages:
   - check
+  - lint
   - test
 
 format:
@@ -18,21 +19,24 @@ license:
     - ./utils/license-check.sh
 
 lint_with_reqwest_async:
-  stage: check
+  stage: lint
+  needs: ["format", "license"]
   before_script:
     - rustup component add clippy
   script:
     - cargo clippy --features reqwest_async -- -D warnings
 
 lint_with_reqwest_blocking:
-  stage: check
+  stage: lint
+  needs: ["format", "license"]
   before_script:
     - rustup component add clippy
   script:
     - cargo clippy --features reqwest_blocking -- -D warnings
 
 lint_with_ureq_blocking:
-  stage: check
+  stage: lint
+  needs: ["format", "license"]
   before_script:
     - rustup component add clippy
   script:
@@ -40,18 +44,18 @@ lint_with_ureq_blocking:
 
 testing_with_reqwest_async:
   stage: test
-  needs: ["format", "license", "lint_with_reqwest_async"]
+  needs: ["lint_with_reqwest_async"]
   script:
     - cargo test --features reqwest_async --verbose
 
 testing_with_reqwest_blocking:
   stage: test
-  needs: ["format", "license", "lint_with_reqwest_blocking"]
+  needs: ["lint_with_reqwest_blocking"]
   script:
     - cargo test --features reqwest_blocking --verbose
 
 testing_with_ureq_blocking:
   stage: test
-  needs: ["format", "license", "lint_with_ureq_blocking"]
+  needs: ["lint_with_ureq_blocking"]
   script:
     - cargo test --features ureq_blocking --verbose
