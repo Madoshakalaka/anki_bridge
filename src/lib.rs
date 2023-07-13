@@ -63,6 +63,13 @@ pub mod card_actions;
     feature = "ureq_blocking"
 ))]
 pub mod deck_actions;
+/// Module containing graphical-related actions for AnkiConnect.
+#[cfg(any(
+    feature = "reqwest_async",
+    feature = "reqwest_blocking",
+    feature = "ureq_blocking"
+))]
+pub mod graphical_actions;
 
 /// Represents the possible errors that can occur during the execution of the `anki_connect_send` function.
 #[cfg(any(
