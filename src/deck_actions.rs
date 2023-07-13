@@ -29,13 +29,15 @@ use serde::{Deserialize, Serialize};
 use crate::{anki_connect_send, Result};
 
 /// Gets the complete list of deck names for the current user.
-pub fn deck_names() -> Result<Vec<String>> {
-    anki_connect_send::<(), _>("deckNames", None)
+#[maybe_async::maybe_async]
+pub async fn deck_names() -> Result<Vec<String>> {
+    anki_connect_send::<(), _>("deckNames", None).await
 }
 
 /// Gets the complete list of deck names for the current user.
-pub fn deck_name_and_ids() -> Result<HashMap<String, usize>> {
-    anki_connect_send::<(), _>("deckNamesAndIds", None)
+#[maybe_async::maybe_async]
+pub async fn deck_name_and_ids() -> Result<HashMap<String, usize>> {
+    anki_connect_send::<(), _>("deckNamesAndIds", None).await
 }
 
 /// Parameters for the "getDecks" action in AnkiConnect.
@@ -46,8 +48,9 @@ pub struct GetDecksParams {
 }
 
 /// Accepts an array of card IDs and returns an object with each deck name as a key, and its value an array of the given cards which belong to it.
-pub fn get_decks(params: GetDecksParams) -> Result<HashMap<String, Vec<usize>>> {
-    anki_connect_send("getDecks", Some(params))
+#[maybe_async::maybe_async]
+pub async fn get_decks(params: GetDecksParams) -> Result<HashMap<String, Vec<usize>>> {
+    anki_connect_send("getDecks", Some(params)).await
 }
 
 /// Parameters for the "createDeck" action in AnkiConnect.
@@ -58,8 +61,9 @@ pub struct CreateDeckParams {
 }
 
 /// Create a new empty deck. Will not overwrite a deck that exists with the same name.
-pub fn create_deck(params: CreateDeckParams) -> Result<usize> {
-    anki_connect_send("createDeck", Some(params))
+#[maybe_async::maybe_async]
+pub async fn create_deck(params: CreateDeckParams) -> Result<usize> {
+    anki_connect_send("createDeck", Some(params)).await
 }
 
 /// Parameters for the "changeDeck" action in AnkiConnect.
@@ -73,8 +77,9 @@ pub struct ChangeDeckParams {
 }
 
 /// Moves cards with the given IDs to a different deck, creating the deck if it doesn’t exist yet.
-pub fn change_deck(params: ChangeDeckParams) -> Result<()> {
-    anki_connect_send("changeDeck", Some(params))
+#[maybe_async::maybe_async]
+pub async fn change_deck(params: ChangeDeckParams) -> Result<()> {
+    anki_connect_send("changeDeck", Some(params)).await
 }
 
 /// Parameters for the "deleteDecks" action in AnkiConnect.
@@ -89,8 +94,9 @@ pub struct DeleteDecksParams {
 }
 
 /// Deletes decks with the given names. The argument [cards_too](DeleteDecksParams::cards_too) must be specified and set to true.
-pub fn delete_decks(params: DeleteDecksParams) -> Result<()> {
-    anki_connect_send("deleteDecks", Some(params))
+#[maybe_async::maybe_async]
+pub async fn delete_decks(params: DeleteDecksParams) -> Result<()> {
+    anki_connect_send("deleteDecks", Some(params)).await
 }
 
 /// Parameters for the "getDeckConfig" action in AnkiConnect.
@@ -197,8 +203,9 @@ pub struct GetDeckConfigRev {
 }
 
 /// Gets the configuration group object for the given deck.
-pub fn get_deck_config(params: GetDeckConfigParams) -> Result<GetDeckConfig> {
-    anki_connect_send("getDeckConfig", Some(params))
+#[maybe_async::maybe_async]
+pub async fn get_deck_config(params: GetDeckConfigParams) -> Result<GetDeckConfig> {
+    anki_connect_send("getDeckConfig", Some(params)).await
 }
 
 /// Parameters for saving a deck configuration.
@@ -306,8 +313,9 @@ pub struct SaveDeckConfigRev {
 }
 
 /// Saves the given configuration group, returning [true] on success or [false] if the ID of the configuration group is invalid (such as when it does not exist).
-pub fn save_deck_config(params: SaveDeckConfigParams) -> Result<bool> {
-    anki_connect_send("saveDeckConfig", Some(params))
+#[maybe_async::maybe_async]
+pub async fn save_deck_config(params: SaveDeckConfigParams) -> Result<bool> {
+    anki_connect_send("saveDeckConfig", Some(params)).await
 }
 
 /// Parameters for changing the configuration group of decks by ID.
@@ -322,8 +330,9 @@ pub struct SaveDeckConfigIdParams {
 
 /// Changes the configuration group for the given decks to the one with the given ID. Returns
 /// [true] on success or [false] if the given configuration group or any of the given decks do not exist.
-pub fn save_deck_config_id(params: SaveDeckConfigIdParams) -> Result<bool> {
-    anki_connect_send("setDeckConfigId", Some(params))
+#[maybe_async::maybe_async]
+pub async fn save_deck_config_id(params: SaveDeckConfigIdParams) -> Result<bool> {
+    anki_connect_send("setDeckConfigId", Some(params)).await
 }
 
 /// Parameters for cloning a deck configuration by ID.
@@ -339,8 +348,9 @@ pub struct CloneDeckConfigIdParams {
 /// Creates a new configuration group with the given name, cloning from the group with the given
 /// ID, or from the default group if this is unspecified. Returns the ID of the new configuration
 /// group, or [false] if the specified group to clone from does not exist.
-pub fn clone_deck_config_id(params: CloneDeckConfigIdParams) -> Result<usize> {
-    anki_connect_send("cloneDeckConfigId", Some(params))
+#[maybe_async::maybe_async]
+pub async fn clone_deck_config_id(params: CloneDeckConfigIdParams) -> Result<usize> {
+    anki_connect_send("cloneDeckConfigId", Some(params)).await
 }
 
 /// Parameters for removing a configuration group by ID.
@@ -352,8 +362,9 @@ pub struct RemoveDeckConfigIdParams {
 }
 
 /// Removes the configuration group with the given ID, returning [true] if successful, or [false] if attempting to remove either the default configuration group (ID = 1) or a configuration group that does not exist.
-pub fn remove_deck_config_id(params: RemoveDeckConfigIdParams) -> Result<bool> {
-    anki_connect_send("removeDeckConfigId", Some(params))
+#[maybe_async::maybe_async]
+pub async fn remove_deck_config_id(params: RemoveDeckConfigIdParams) -> Result<bool> {
+    anki_connect_send("removeDeckConfigId", Some(params)).await
 }
 
 /// Parameters for the "getDeckStats" action.
@@ -381,6 +392,7 @@ pub struct GetDeckStats {
 }
 
 /// Gets statistics such as total cards and cards due for the given decks.
-pub fn get_deck_stats(params: GetDeckStatsParams) -> Result<HashMap<String, GetDeckStats>> {
-    anki_connect_send("getDeckStats", Some(params))
+#[maybe_async::maybe_async]
+pub async fn get_deck_stats(params: GetDeckStatsParams) -> Result<HashMap<String, GetDeckStats>> {
+    anki_connect_send("getDeckStats", Some(params)).await
 }

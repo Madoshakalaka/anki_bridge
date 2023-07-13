@@ -1,6 +1,6 @@
 [package]
 name = "anki_bridge"
-version = "0.2.0"
+version = "0.3.0"
 edition = "2021"
 description = "AnkiBridge is a Rust library that provides a bridge between your Rust code and the Anki application, enabling HTTP communication and seamless data transmission."
 keywords = ["anki", "ankiconnect", "addon", "bridge", "flashcards"]
@@ -15,11 +15,13 @@ include = [
 
 [features]
 default = []
-reqwest = ["dep:reqwest"]
-ureq = ["dep:ureq"]
+reqwest_async = ["maybe-async", "reqwest"]
+reqwest_blocking = ["maybe-async/is_sync", "reqwest/blocking"]
+ureq_blocking = ["maybe-async/is_sync", "ureq"]
 
 [dependencies]
-reqwest = { version = "0.11", optional = true, default-features = false, features = ["blocking", "json", "serde_json"] }
+maybe-async = { version = "0.2", optional = true, features = [] }
+reqwest = { version = "0.11", optional = true, default-features = false, features = ["json", "serde_json"] }
 serde = { version = "1.0", features = ["derive"] }
 thiserror = "1.0"
 ureq = { version = "2.7", optional = true, default-features = false, features = ["json"] }

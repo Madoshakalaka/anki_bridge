@@ -36,8 +36,9 @@ pub struct GetEaseFactorsParams {
 }
 
 /// Returns an array with the ease factor for each of the given cards (in the same order).
-pub fn get_ease_factors(params: GetEaseFactorsParams) -> Result<Vec<usize>> {
-    anki_connect_send("getEaseFactors", Some(params))
+#[maybe_async::maybe_async]
+pub async fn get_ease_factors(params: GetEaseFactorsParams) -> Result<Vec<usize>> {
+    anki_connect_send("getEaseFactors", Some(params)).await
 }
 
 /// Parameters for the "setEaseFactors" action.
@@ -51,8 +52,9 @@ pub struct SetEaseFactorsParams {
 }
 
 /// Sets ease factor of cards by card ID; returns [true] if successful (all cards existed) or [false] otherwise.
-pub fn set_ease_factors(params: SetEaseFactorsParams) -> Result<Vec<bool>> {
-    anki_connect_send("setEaseFactors", Some(params))
+#[maybe_async::maybe_async]
+pub async fn set_ease_factors(params: SetEaseFactorsParams) -> Result<Vec<bool>> {
+    anki_connect_send("setEaseFactors", Some(params)).await
 }
 
 /// Parameters for the "setSpecificValueOfCard" action.
@@ -73,8 +75,9 @@ pub struct SetSpecificValueOfCardParams {
 /// order in a filtered deck and change the column “data” (not currently used by anki apparantly),
 /// and many other values. A list of values and explanation of their respective utility can be
 /// found at [AnkiDroid’s wiki](https://github.com/ankidroid/Anki-Android/wiki/Database-Structure).
-pub fn set_specific_value_of_card(params: SetSpecificValueOfCardParams) -> Result<Vec<bool>> {
-    anki_connect_send("setSpecificValueOfCard", Some(params))
+#[maybe_async::maybe_async]
+pub async fn set_specific_value_of_card(params: SetSpecificValueOfCardParams) -> Result<Vec<bool>> {
+    anki_connect_send("setSpecificValueOfCard", Some(params)).await
 }
 
 /// Parameters for the "suspend" action.
@@ -86,8 +89,9 @@ pub struct SuspendParams {
 
 /// Suspend cards by card ID; returns [true] if successful (at least one card wasn’t already
 /// suspended) or [false] otherwise.
-pub fn suspend(params: SuspendParams) -> Result<bool> {
-    anki_connect_send("suspend", Some(params))
+#[maybe_async::maybe_async]
+pub async fn suspend(params: SuspendParams) -> Result<bool> {
+    anki_connect_send("suspend", Some(params)).await
 }
 
 /// Parameters for the "unsuspend" action.
@@ -99,8 +103,9 @@ pub struct UnsuspendParams {
 
 /// Unsuspend cards by card ID; returns [true] if successful (at least one card was previously
 /// suspended) or [false] otherwise.
-pub fn unsuspend(params: UnsuspendParams) -> Result<bool> {
-    anki_connect_send("unsuspend", Some(params))
+#[maybe_async::maybe_async]
+pub async fn unsuspend(params: UnsuspendParams) -> Result<bool> {
+    anki_connect_send("unsuspend", Some(params)).await
 }
 
 /// Parameters for the "suspended" action.
@@ -111,8 +116,9 @@ pub struct SuspendedParams {
 }
 
 /// Check if card is suspended by its ID. Returns [true] if suspended, [false] otherwise.
-pub fn suspended(params: SuspendedParams) -> Result<bool> {
-    anki_connect_send("suspended", Some(params))
+#[maybe_async::maybe_async]
+pub async fn suspended(params: SuspendedParams) -> Result<bool> {
+    anki_connect_send("suspended", Some(params)).await
 }
 
 /// Parameters for the "areSuspended" action.
@@ -124,8 +130,9 @@ pub struct AreSuspendedParams {
 
 /// Returns an array indicating whether each of the given cards is suspended (in the same order).
 /// If card doesn’t exist returns `null`.
-pub fn are_suspended(params: AreSuspendedParams) -> Result<Vec<bool>> {
-    anki_connect_send("areSuspended", Some(params))
+#[maybe_async::maybe_async]
+pub async fn are_suspended(params: AreSuspendedParams) -> Result<Vec<bool>> {
+    anki_connect_send("areSuspended", Some(params)).await
 }
 
 /// Parameters for the "areDue" action.
@@ -136,8 +143,9 @@ pub struct AreDueParams {
 }
 
 /// Returns an array indicating whether each of the given cards is due (in the same order). Note: cards in the learning queue with a large interval (over 20 minutes) are treated as not due until the time of their interval has passed, to match the way Anki treats them when reviewing.
-pub fn are_due(params: AreDueParams) -> Result<Vec<bool>> {
-    anki_connect_send("areDue", Some(params))
+#[maybe_async::maybe_async]
+pub async fn are_due(params: AreDueParams) -> Result<Vec<bool>> {
+    anki_connect_send("areDue", Some(params)).await
 }
 
 /// Parameters for the "getIntervals" action.
@@ -149,8 +157,9 @@ pub struct GetIntervalsParams {
 
 /// Returns an array of the most recent intervals for each given card ID, or a 2-dimensional array
 /// of all the intervals for each given card ID when `complete` is [true]. Negative intervals are in seconds and positive intervals in days.
-pub fn get_intervals(params: GetIntervalsParams) -> Result<Vec<isize>> {
-    anki_connect_send("getIntervals", Some(params))
+#[maybe_async::maybe_async]
+pub async fn get_intervals(params: GetIntervalsParams) -> Result<Vec<isize>> {
+    anki_connect_send("getIntervals", Some(params)).await
 }
 
 /// Parameters for the "getIntervals" action alternative.
@@ -164,8 +173,9 @@ pub struct GetIntervalsAlternativeParams {
 
 /// Returns an array of the most recent intervals for each given card ID, or a 2-dimensional array
 /// of all the intervals for each given card ID when `complete` is [true]. Negative intervals are in seconds and positive intervals in days.
-pub fn get_intervals_alternative(params: GetIntervalsAlternativeParams) -> Result<Vec<Vec<isize>>> {
-    anki_connect_send("getIntervals", Some(params))
+#[maybe_async::maybe_async]
+pub async fn get_intervals_alternative(params: GetIntervalsAlternativeParams) -> Result<Vec<Vec<isize>>> {
+    anki_connect_send("getIntervals", Some(params)).await
 }
 
 /// Parameters for the "findCards" action.
@@ -176,8 +186,9 @@ pub struct FindCardsParams {
 }
 
 /// Returns an array of card IDs for a given query. Functionally identical to `guiBrowse` but doesn’t use the GUI for better performance.
-pub fn find_cards(params: FindCardsParams) -> Result<Vec<usize>> {
-    anki_connect_send("findCards", Some(params))
+#[maybe_async::maybe_async]
+pub async fn find_cards(params: FindCardsParams) -> Result<Vec<usize>> {
+    anki_connect_send("findCards", Some(params)).await
 }
 
 /// Parameters for the "cardsToNotes" action.
@@ -188,8 +199,9 @@ pub struct CardsToNotesParams {
 }
 
 /// Returns an unordered array of note IDs for the given card IDs. For cards with the same note, the ID is only given once in the array.
-pub fn cards_to_notes(params: CardsToNotesParams) -> Result<Vec<usize>> {
-    anki_connect_send("cardsToNotes", Some(params))
+#[maybe_async::maybe_async]
+pub async fn cards_to_notes(params: CardsToNotesParams) -> Result<Vec<usize>> {
+    anki_connect_send("cardsToNotes", Some(params)).await
 }
 
 /// Parameters for the "cardsModTime" action.
@@ -212,8 +224,9 @@ pub struct CardsModTime {
 
 /// Returns a list of objects containings for each card ID the modification time. This function is
 /// about 15 times faster than executing `cardsInfo`.
-pub fn cards_mod_times(params: CardsModTimeParams) -> Result<Vec<CardsModTime>> {
-    anki_connect_send("cardsModTime", Some(params))
+#[maybe_async::maybe_async]
+pub async fn cards_mod_times(params: CardsModTimeParams) -> Result<Vec<CardsModTime>> {
+    anki_connect_send("cardsModTime", Some(params)).await
 }
 
 /// Parameters for retrieving information about cards.
@@ -277,8 +290,9 @@ pub struct CardsInfoField {
 }
 
 /// Returns a list of objects containing for each card ID the card fields, front and back sides including CSS, note type, the note that the card belongs to, and deck name, last modification timestamp as well as ease and interval.
-pub fn cards_info(params: CardsInfoParams) -> Result<Vec<CardsInfo>> {
-    anki_connect_send("cardsInfo", Some(params))
+#[maybe_async::maybe_async]
+pub async fn cards_info(params: CardsInfoParams) -> Result<Vec<CardsInfo>> {
+    anki_connect_send("cardsInfo", Some(params)).await
 }
 
 /// Parameters for forgetting cards.
@@ -289,8 +303,9 @@ pub struct ForgetCardsParams {
 }
 
 /// Forget cards, making the cards new again.
-pub fn forget_cards(params: ForgetCardsParams) -> Result<()> {
-    anki_connect_send("forgetCards", Some(params))
+#[maybe_async::maybe_async]
+pub async fn forget_cards(params: ForgetCardsParams) -> Result<()> {
+    anki_connect_send("forgetCards", Some(params)).await
 }
 
 /// Parameters for relearning cards.
@@ -301,6 +316,7 @@ pub struct RelearnCardsParams {
 }
 
 /// Make cards be “relearning”.
-pub fn relearn_cards(params: RelearnCardsParams) -> Result<()> {
-    anki_connect_send("relearnCards", Some(params))
+#[maybe_async::maybe_async]
+pub async fn relearn_cards(params: RelearnCardsParams) -> Result<()> {
+    anki_connect_send("relearnCards", Some(params)).await
 }
