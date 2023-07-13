@@ -17,15 +17,41 @@ license:
   script:
     - ./utils/license-check.sh
 
-lint:
+lint_with_reqwest_async:
   stage: check
   before_script:
     - rustup component add clippy
   script:
-    - cargo clippy --features ureq -- -D warnings
+    - cargo clippy --features reqwest_async -- -D warnings
 
-testing:
-  stage: test
-  needs: ["format", "license", "lint"]
+lint_with_reqwest_blocking:
+  stage: check
+  before_script:
+    - rustup component add clippy
   script:
-    - cargo test --features ureq --verbose
+    - cargo clippy --features reqwest_blocking -- -D warnings
+
+lint_with_ureq_blocking:
+  stage: check
+  before_script:
+    - rustup component add clippy
+  script:
+    - cargo clippy --features ureq_blocking -- -D warnings
+
+testing_with_reqwest_async:
+  stage: test
+  needs: ["format", "license", "lint_with_reqwest_async"]
+  script:
+    - cargo test --features reqwest_async --verbose
+
+testing_with_reqwest_blocking:
+  stage: test
+  needs: ["format", "license", "lint_with_reqwest_blocking"]
+  script:
+    - cargo test --features reqwest_blocking --verbose
+
+testing_with_ureq_blocking:
+  stage: test
+  needs: ["format", "license", "lint_with_ureq_blocking"]
+  script:
+    - cargo test --features ureq_blocking --verbose
