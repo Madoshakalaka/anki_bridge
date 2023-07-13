@@ -179,10 +179,10 @@ async fn anki_connect_send<P: Serialize, R: DeserializeOwned + Default>(
             .json(&data)
             .send()
             .await
-            .map_err(|error| Error::Reqwest(error))?
+            .map_err(Error::Reqwest)?
             .json::<AnkiConnectResponse<R>>()
             .await
-            .map_err(|error| Error::Reqwest(error))
+            .map_err(Error::Reqwest)
     }?;
 
     #[cfg(feature = "ureq_blocking")]
