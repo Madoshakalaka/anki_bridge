@@ -1,6 +1,6 @@
 [package]
 name = "anki_bridge"
-version = "0.4.0"
+version = "0.4.1"
 edition = "2021"
 description = "AnkiBridge is a Rust library that provides a bridge between your Rust code and the Anki application, enabling HTTP communication and seamless data transmission."
 keywords = ["anki", "ankiconnect", "addon", "bridge", "flashcards"]
