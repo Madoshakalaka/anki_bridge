@@ -22,6 +22,8 @@
 * SOFTWARE.
 */
 
+use std::collections::HashMap;
+
 use serde::{Deserialize, Serialize};
 
 use crate::{anki_connect_send, Result};
@@ -132,31 +134,22 @@ pub struct GuiCurrentCard {
     /// The field order of the current card.
     pub field_order: isize,
     /// The fields of the current card.
-    pub fields: GuiCurrentCardFields,
+    pub fields: HashMap<String, GuiCurrentCardField>,
+    /// The CSS of the current card.
+    pub css: String,
     /// The template of the current card.
     pub template: String,
     /// The ID of the current card.
-    pub card_id: isize,
+    pub card_id: usize,
     /// The buttons associated with the current card.
     pub buttons: Vec<isize>,
     /// The next reviews for the current card.
     pub next_reviews: Vec<String>,
 }
 
-/// Represents the fields of the current card being reviewed.
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct GuiCurrentCardFields {
-    /// The front face of the fields.
-    #[serde(rename = "Front")]
-    /// The back face of the fields.
-    pub front: GuiCurrentCardFieldsFace,
-    #[serde(rename = "Back")]
-    pub back: GuiCurrentCardFieldsFace,
-}
-
 /// Represents a face of the fields of the current card being reviewed.
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct GuiCurrentCardFieldsFace {
+pub struct GuiCurrentCardField {
     /// The value of the face.
     pub value: String,
     /// The order of the face.
@@ -185,14 +178,14 @@ pub async fn gui_show_question() -> Result<()> {
 
 /// Shows answer text for the current card; returns [true] if in review mode or [false] otherwise.
 #[maybe_async::maybe_async]
-pub async fn gui_show_answer() -> Result<()> {
+pub async fn gui_show_answer() -> Result<bool> {
     anki_connect_send::<(), _>("guiShowAnswer", None).await
 }
 
 /// Parameters for answering the current card.
 #[derive(Default, Debug, Clone, PartialEq, Serialize)]
 pub struct GuiAnswerCardParams {
-    pub cards: String,
+    pub ease: usize,
 }
 
 /// Answers the current card; returns [true] if succeeded or [false] otherwise. Note that the answer for the current card must be displayed before before any answer can be accepted by Anki.
