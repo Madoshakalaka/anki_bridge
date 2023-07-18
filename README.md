@@ -75,9 +75,13 @@ AnkiBridge is an ongoing project with planned future developments. Here are the 
 - [X] [ureq](https://github.com/algesten/ureq) synchronous HTTP client
 - [X] [reqwest](https://github.com/seanmonstar/reqwest) asynchronous HTTP client
 - [X] Mockable Client
-- [ ] Tests
+- [ ] Tests (real json test, mocking is already working)
 
 Contributions to AnkiBridge are welcome. Feel free to contribute by opening issues or submitting pull requests on the [GitLab repository](https://gitlab.com/kerkmann/anki_bridge).
+
+## Special Thanks
+
+Thanks to [VaiTon](https://github.com/VaiTon) for having the idea to just implement a trait, instead of writing a function. That helped me to write a mockable client and clean everything up. You can find his implementation of the AnkiConnect bridge on [GitHub](https://github.com/VaiTon). :)
 
 ## License
 
