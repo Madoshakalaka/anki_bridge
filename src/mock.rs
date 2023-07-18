@@ -74,6 +74,8 @@ where
 mod tests {
     use serde::{Deserialize, Serialize};
 
+    use crate::card_actions::find_cards::FindCardsRequest;
+
     use super::*;
 
     #[derive(Default, Debug, Clone, PartialEq, Eq, Serialize)]
@@ -121,5 +123,37 @@ mod tests {
             })
             .await;
         assert_eq!(String::from("HelloWorld"), response.unwrap().data);
+    }
+
+    #[cfg(any(feature = "reqwest_blocking", feature = "ureq_blocking"))]
+    #[test]
+    fn test_sync_find_cards() {
+        let client = MockAnkiClient::<FindCardsRequest, _>::new_mock(|params| {
+            Ok(vec![123, 456, 789, params.query.len()])
+        });
+        let response = client.request(FindCardsRequest {
+            query: "Card Deck Name".to_string(),
+        });
+        assert_eq!(
+            vec![123, 456, 789, "Card Deck Name".len()],
+            response.unwrap()
+        );
+    }
+
+    #[cfg(feature = "reqwest_async")]
+    #[tokio::test]
+    async fn test_async_find_cards() {
+        let client = MockAnkiClient::<FindCardsRequest, _>::new_mock(|params| {
+            Ok(vec![123, 456, 789, params.query.len()])
+        });
+        let response = client
+            .request(FindCardsRequest {
+                query: "Card Deck Name".to_string(),
+            })
+            .await;
+        assert_eq!(
+            vec![123, 456, 789, "Card Deck Name".len()],
+            response.unwrap()
+        );
     }
 }

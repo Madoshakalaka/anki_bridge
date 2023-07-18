@@ -47,34 +47,17 @@ fn main() {
 
 ```rust
 use anki_bridge::{mock::*, prelude::*};
-use serde::{Deserialize, Serialize};
 
-#[derive(Default, Debug, Clone, PartialEq, Eq, Serialize)]
-pub struct TestRequest {
-    pub data: String,
-}
-
-#[derive(Default, Debug, Clone, PartialEq, Eq, Deserialize)]
-pub struct TestResponse {
-    pub data: String,
-}
-
-impl AnkiRequest for TestRequest {
-    type Response = TestResponse;
-
-    const ACTION: &'static str = "testEndpoint";
-    const VERSION: u8 = 6;
-}
-
-let client = MockAnkiClient::<TestRequest, _>::new_mock(|params| {
-    Ok(TestResponse {
-        data: format!("{}World", params.data),
-    })
+let client = MockAnkiClient::<FindCardsRequest, _>::new_mock(|params| {
+    Ok(vec![123, params.query.len()])
 });
-let response = client.request(TestRequest {
-    data: "Hello".to_string(),
+let response = client.request(FindCardsRequest {
+    query: "Card Deck Name".to_string(),
 });
-assert_eq!(String::from("HelloWorld"), response.unwrap().data);
+assert_eq!(
+    vec![123, "Card Deck Name".len()],
+    response.unwrap()
+);
 ```
 
 ## Todo
