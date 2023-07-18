@@ -81,7 +81,7 @@ Contributions to AnkiBridge are welcome. Feel free to contribute by opening issu
 
 ## Special Thanks
 
-Thanks to [VaiTon](https://github.com/VaiTon) for having the idea to just implement a trait, instead of writing a function. That helped me to write a mockable client and clean everything up. You can find his implementation of the AnkiConnect bridge on [GitHub](https://github.com/VaiTon). :)
+Thanks to [VaiTon](https://github.com/VaiTon) for having the idea to just implement a trait, instead of writing a function. That helped me to write a mockable client and clean everything up. You can find his implementation of the AnkiConnect bridge on [GitHub](https://github.com/VaiTon/ankituls). :)
 
 ## License
 
