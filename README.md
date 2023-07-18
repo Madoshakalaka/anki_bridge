@@ -17,7 +17,7 @@ To use AnkiBridge in your Rust project, add the following line to your `Cargo.to
 
 ```toml
 [dependencies]
-anki_bridge = { version = "0.4", features = ["ureq_blocking"] }
+anki_bridge = { version = "0.5", features = ["ureq_blocking"] }
 ```
 
 Additionally, ensure that you have the Anki application installed on your system and that the [AnkiConnect](https://ankiweb.net/shared/info/2055492159) add-on is installed within Anki.
@@ -29,31 +29,52 @@ Please note that Anki must be opened and running on your computer for AnkiBridge
 To establish a connection and perform actions with Anki, you can utilize the functions and structs provided by the AnkiBridge library in your Rust code. Here's a basic example:
 
 ```rust
-use anki_bridge::deck_actions::{GetDeckStatsParams, get_deck_stats};
+use std::collections::HashMap;
+
+use anki_bridge::prelude::*;
 
 fn main() {
-    // Establish the parameters for retrieving deck statistics
-    let params = GetDeckStatsParams {
-        decks: vec!["Deck1".to_string(), "Deck2".to_string()],
-    };
-
-    // Retrieve deck statistics from Anki
-    match get_deck_stats(params) {
-        Ok(deck_stats) => {
-            for (deck_name, stats) in deck_stats {
-                println!("Deck: {}", deck_name);
-                println!("Total Cards: {}", stats.total_in_deck);
-                println!("New Cards: {}", stats.new_count);
-                println!("Learning Cards: {}", stats.learn_count);
-                println!("Review Cards: {}", stats.review_count);
-                println!("---");
-            }
-        }
-        Err(err) => {
-            println!("Error: {}", err);
-        }
-    }
+    let client = AnkiClient::default();
+    let decks: Vec<String> = client.request(DeckNamesRequest {}).unwrap();
+    println!("{decks:#?}");
+    let deck_stats: HashMap<usize, GetDeckStatsResponse> =
+        client.request(GetDeckStatsRequest { decks }).unwrap();
+    println!("{deck_stats:#?}");
 }
+```
+
+### Mocking Data
+
+```rust
+use anki_bridge::{mock::*, prelude::*};
+use serde::{Deserialize, Serialize};
+
+#[derive(Default, Debug, Clone, PartialEq, Eq, Serialize)]
+pub struct TestRequest {
+    pub data: String,
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Eq, Deserialize)]
+pub struct TestResponse {
+    pub data: String,
+}
+
+impl AnkiRequest for TestRequest {
+    type Response = TestResponse;
+
+    const ACTION: &'static str = "testEndpoint";
+    const VERSION: u8 = 6;
+}
+
+let client = MockAnkiClient::<TestRequest, _>::new_mock(|params| {
+    Ok(TestResponse {
+        data: format!("{}World", params.data),
+    })
+});
+let response = client.request(TestRequest {
+    data: "Hello".to_string(),
+});
+assert_eq!(String::from("HelloWorld"), response.unwrap().data);
 ```
 
 ## Todo
@@ -70,6 +91,7 @@ AnkiBridge is an ongoing project with planned future developments. Here are the 
 - [ ] Statistic Actions
 - [X] [ureq](https://github.com/algesten/ureq) synchronous HTTP client
 - [X] [reqwest](https://github.com/seanmonstar/reqwest) asynchronous HTTP client
+- [X] Mockable Client
 - [ ] Tests
 
 Contributions to AnkiBridge are welcome. Feel free to contribute by opening issues or submitting pull requests on the [GitLab repository](https://gitlab.com/kerkmann/anki_bridge).
