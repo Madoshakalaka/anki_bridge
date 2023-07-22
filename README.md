@@ -17,7 +17,7 @@ To use AnkiBridge in your Rust project, add the following line to your `Cargo.to
 
 ```toml
 [dependencies]
-anki_bridge = { version = "0.6", features = ["ureq_blocking"] }
+anki_bridge = { version = "0.7", features = ["ureq_blocking"] }
 ```
 
 Additionally, ensure that you have the Anki application installed on your system and that the [AnkiConnect](https://ankiweb.net/shared/info/2055492159) add-on is installed within Anki.
@@ -68,7 +68,7 @@ AnkiBridge is an ongoing project with planned future developments. Here are the 
 - [x] Deck Actions
 - [X] Graphical Actions
 - [ ] Media Actions
-- [ ] Miscellaneous Actions
+- [X] Miscellaneous Actions
 - [ ] Model Actions
 - [ ] Note Actions
 - [X] Statistic Actions
