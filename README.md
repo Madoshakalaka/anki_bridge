@@ -71,13 +71,17 @@ AnkiBridge is an ongoing project with planned future developments. Here are the 
 - [ ] Miscellaneous Actions
 - [ ] Model Actions
 - [ ] Note Actions
-- [ ] Statistic Actions
+- [X] Statistic Actions
 - [X] [ureq](https://github.com/algesten/ureq) synchronous HTTP client
 - [X] [reqwest](https://github.com/seanmonstar/reqwest) asynchronous HTTP client
 - [X] Mockable Client
 - [ ] Tests (real json test, mocking is already working)
 
 Contributions to AnkiBridge are welcome. Feel free to contribute by opening issues or submitting pull requests on the [GitLab repository](https://gitlab.com/kerkmann/anki_bridge).
+
+## Changelog
+
+The entire changelog can be found in the [CHANGELOG.md](CHANGELOG.md) file.
 
 ## Special Thanks
 

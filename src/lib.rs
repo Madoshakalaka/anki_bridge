@@ -51,6 +51,8 @@ pub mod graphical_actions;
 pub mod mock;
 // Module containing every module which could be useful;
 pub mod prelude;
+// Module containing statistic-related actions for `AnkiConnect`.
+pub mod statistic_actions;
 
 /// Represents the possible errors that can occur during the execution of the `anki_connect_send` function.
 #[derive(Debug, Error)]
