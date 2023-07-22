@@ -47,6 +47,8 @@ pub mod card_actions;
 pub mod deck_actions;
 // Module containing graphical-related actions for `AnkiConnect`.
 pub mod graphical_actions;
+// Module containing statistic-related actions for `AnkiConnect`.
+pub mod miscellaneous_actions;
 // Module containing mockable client which can be used in other projects.
 pub mod mock;
 // Module containing every module which could be useful;

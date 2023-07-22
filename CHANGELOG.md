@@ -4,6 +4,11 @@
 
 This version is an early prototype, changes will happen and they will break sometimes. Please keep that in mind. ;)
 
+### v0.7.0
+
+- Add all `miscellaneous_actions`
+- Add doc check to ci
+
 ### v0.6.1
 
 - Chore: Add `statistic_actions` to prelude, which was forgotten
