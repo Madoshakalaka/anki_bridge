@@ -11,7 +11,10 @@ repository = "https://gitlab.com/kerkmann/anki_bridge"
 documentation = "https://docs.rs/anki_bridge"
 include = [
     "**/*.rs",
+    "CHANGELOG.md",
     "Cargo.toml",
+    "LICENSE",
+    "README.md",
 ]
 
 [package.metadata.docs.rs]
