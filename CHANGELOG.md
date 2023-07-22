@@ -4,6 +4,10 @@
 
 This version is an early prototype, changes will happen and they will break sometimes. Please keep that in mind. ;)
 
+### v0.6.1
+
+- Chore: Add `statistic_actions` to prelude, which was forgotten
+
 ### v0.6.0
 
 - Add all `statistic actions`
