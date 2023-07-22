@@ -5,6 +5,8 @@ stages:
   - check
   - lint
   - test
+  - doc
+  - build
 
 format:
   stage: check
@@ -18,44 +20,80 @@ license:
   script:
     - ./utils/license-check.sh
 
-lint_with_reqwest_async:
+lint -F reqwest_async:
   stage: lint
   needs: ["format", "license"]
   before_script:
     - rustup component add clippy
   script:
-    - cargo clippy --features reqwest_async -- -D warnings
+    - cargo clippy -F reqwest_async -- -D warnings
 
-lint_with_reqwest_blocking:
+lint -F reqwest_blocking:
   stage: lint
   needs: ["format", "license"]
   before_script:
     - rustup component add clippy
   script:
-    - cargo clippy --features reqwest_blocking -- -D warnings
+    - cargo clippy -F reqwest_blocking -- -D warnings
 
-lint_with_ureq_blocking:
+lint -F ureq_blocking:
   stage: lint
   needs: ["format", "license"]
   before_script:
     - rustup component add clippy
   script:
-    - cargo clippy --features ureq_blocking -- -D warnings
+    - cargo clippy -F ureq_blocking -- -D warnings
 
-testing_with_reqwest_async:
+test -F reqwest_async:
   stage: test
-  needs: ["lint_with_reqwest_async"]
+  needs: ["lint -F reqwest_async"]
   script:
-    - cargo test --features reqwest_async --verbose
+    - cargo test -F reqwest_async --verbose
 
-testing_with_reqwest_blocking:
+test -F reqwest_blocking:
   stage: test
-  needs: ["lint_with_reqwest_blocking"]
+  needs: ["lint -F reqwest_blocking"]
   script:
-    - cargo test --features reqwest_blocking --verbose
+    - cargo test -F reqwest_blocking --verbose
 
-testing_with_ureq_blocking:
+test -F ureq_blocking:
   stage: test
-  needs: ["lint_with_ureq_blocking"]
+  needs: ["lint -F ureq_blocking"]
   script:
-    - cargo test --features ureq_blocking --verbose
+    - cargo test -F ureq_blocking --verbose
+
+doc -F reqwest_async:
+  stage: doc
+  needs: ["lint -F reqwest_async"]
+  script:
+    - cargo doc -F reqwest_async --workspace --no-deps
+
+doc -F reqwest_blocking:
+  stage: doc
+  needs: ["lint -F reqwest_blocking"]
+  script:
+    - cargo doc -F reqwest_blocking --workspace --no-deps
+
+doc -F ureq_blocking:
+  stage: doc
+  needs: ["lint -F ureq_blocking"]
+  script:
+    - cargo doc -F ureq_blocking --workspace --no-deps
+
+build -F reqwest_async:
+  stage: build
+  needs: ["test -F reqwest_async", "doc -F reqwest_async"]
+  script:
+    - cargo build -F reqwest_async
+
+build -F reqwest_blocking:
+  stage: build
+  needs: ["test -F reqwest_blocking", "doc -F reqwest_blocking"]
+  script:
+    - cargo build -F reqwest_blocking
+
+build -F ureq_blocking:
+  stage: build
+  needs: ["test -F ureq_blocking", "doc -F ureq_blocking"]
+  script:
+    - cargo build -F ureq_blocking
