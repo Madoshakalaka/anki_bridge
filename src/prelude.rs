@@ -40,5 +40,10 @@ pub use crate::{
         gui_edit_note::*, gui_exit_anki::*, gui_selected_notes::*, gui_show_answer::*,
         gui_show_question::*, gui_start_card_timer::*,
     },
+    statistic_actions::{
+        card_reviews::*, get_collection_stats_html::*, get_latest_review_id::*,
+        get_num_cards_reviewed_by_day::*, get_num_cards_reviewed_today::*, get_reviews_of_cards::*,
+        insert_reviews::*,
+    },
     AnkiClient, AnkiRequestable,
 };
