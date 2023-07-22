@@ -27,7 +27,7 @@ use serde_tuple::Deserialize_tuple;
 
 use crate::AnkiRequest;
 
-/// Parameters for the "getNumCardsReviewedByDay" action.
+/// Parameters for the "`getNumCardsReviewedByDay`" action.
 #[derive(Default, Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct GetNumCardsReviewedByDayRequest;
 

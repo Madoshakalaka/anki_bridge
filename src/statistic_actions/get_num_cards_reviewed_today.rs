@@ -26,7 +26,7 @@ use serde::Serialize;
 
 use crate::AnkiRequest;
 
-/// Parameters for the "getNumCardsReviewedToday" action.
+/// Parameters for the "`getNumCardsReviewedToday`" action.
 #[derive(Default, Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct GetNumCardsReviewedTodayRequest;
 

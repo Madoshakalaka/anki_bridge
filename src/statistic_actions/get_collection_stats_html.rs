@@ -26,7 +26,7 @@ use serde::Serialize;
 
 use crate::AnkiRequest;
 
-/// Parameters for the "getCollectionStatsHTML" action.
+/// Parameters for the "`getCollectionStatsHTML`" action.
 #[derive(Default, Debug, Clone, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetCollectionStatsHTMLRequest {

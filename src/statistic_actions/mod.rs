@@ -22,7 +22,7 @@
 * SOFTWARE.
 */
 
-/// Requests all card reviews for a specified deck after a certain time. startID is the latest unix time not included in the result. Returns a list of 9-tuples (reviewTime, cardID, usn, buttonPressed, newInterval, previousInterval, newFactor, reviewDuration, reviewType)
+/// Requests all card reviews for a specified deck after a certain time. `startID` is the latest unix time not included in the result. Returns a list of 9-tuples (reviewTime, `cardID`, usn, buttonPressed, newInterval, previousInterval, newFactor, reviewDuration, reviewType)
 pub mod card_reviews;
 
 /// Gets the collection statistics report
@@ -53,5 +53,5 @@ pub mod get_num_cards_reviewed_today;
 /// The reason why these key values are used instead of the more descriptive counterparts is because these are the exact key values used in Anki’s database.
 pub mod get_reviews_of_cards;
 
-/// Inserts the given reviews into the database. Required format: list of 9-tuples (reviewTime, cardID, usn, buttonPressed, newInterval, previousInterval, newFactor, reviewDuration, reviewType)
+/// Inserts the given reviews into the database. Required format: list of 9-tuples (reviewTime, `cardID`, usn, buttonPressed, newInterval, previousInterval, newFactor, reviewDuration, reviewType)
 pub mod insert_reviews;

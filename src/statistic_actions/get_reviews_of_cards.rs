@@ -28,7 +28,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::AnkiRequest;
 
-/// Parameters for the "getReviewsOfCards" action.
+/// Parameters for the "`getReviewsOfCards`" action.
 #[derive(Default, Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct GetReviewsOfCardsRequest {
     /// IDs of the cards to get reviews.

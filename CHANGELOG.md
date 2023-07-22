@@ -4,6 +4,10 @@
 
 This version is an early prototype, changes will happen and they will break sometimes. Please keep that in mind. ;)
 
+### v0.7.1
+
+- Fix some documentation
+
 ### v0.7.0
 
 - Add all `miscellaneous_actions`

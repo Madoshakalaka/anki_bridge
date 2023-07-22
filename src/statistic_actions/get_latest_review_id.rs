@@ -26,7 +26,7 @@ use serde::Serialize;
 
 use crate::AnkiRequest;
 
-/// Parameters for the "getLatestReviewID" action.
+/// Parameters for the "`getLatestReviewID`" action.
 #[derive(Default, Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct GetLatestReviewIDRequest {
     pub deck: String,
