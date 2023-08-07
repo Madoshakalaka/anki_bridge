@@ -49,12 +49,15 @@ pub mod deck_actions;
 pub mod graphical_actions;
 /// Module containing statistic-related actions for `AnkiConnect`.
 pub mod miscellaneous_actions;
+/// Module containing notes-related actions for `AnkiConnect`.
+pub mod notes_actions;
+/// Module containing statistic-related actions for `AnkiConnect`.
+pub mod statistic_actions;
+
 /// Module containing mockable client which can be used in other projects.
 pub mod mock;
 /// Module containing every module which could be useful;
 pub mod prelude;
-/// Module containing statistic-related actions for `AnkiConnect`.
-pub mod statistic_actions;
 
 /// Represents the possible errors that can occur during the execution of the `anki_connect_send` function.
 #[derive(Debug, Error)]
