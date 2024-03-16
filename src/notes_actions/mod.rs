@@ -21,5 +21,9 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
+/// Deletes notes with the given ids. If a note has several cards associated with it, all associated cards will be deleted
+pub mod delete_notes;
+/// Returns an array of note IDs for a given query. Query syntax is documented [here](https://docs.ankiweb.net/searching.html).
 pub mod find_notes;
+/// Returns a list of objects containing for each note ID the note fields, tags, note type and the cards belonging to the note.
 pub mod notes_info;
