@@ -4,6 +4,11 @@
 
 This version is an early prototype, changes will happen and they will break sometimes. Please keep that in mind. ;)
 
+### v.0.8.0
+
+- Add all `model_actions`
+- Minor fixes for `note_actions`
+
 ### v0.7.1
 
 - Fix some documentation
