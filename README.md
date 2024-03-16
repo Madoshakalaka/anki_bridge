@@ -69,7 +69,7 @@ AnkiBridge is an ongoing project with planned future developments. Here are the 
 - [X] Graphical Actions
 - [ ] Media Actions
 - [X] Miscellaneous Actions
-- [ ] Model Actions
+- [X] Model Actions
 - [ ] Note Actions
 - [X] Statistic Actions
 - [X] [ureq](https://github.com/algesten/ureq) synchronous HTTP client

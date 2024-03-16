@@ -21,33 +21,19 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
+use serde::Serialize;
 
 use crate::AnkiRequest;
 
+/// Parameters for the "deleteNotes" action in `AnkiConnect`.
 #[derive(Default, Debug, Clone, PartialEq, Eq, Serialize)]
-pub struct NotesInfoRequest {
+pub struct DeleteNotesRequest {
     pub notes: Vec<usize>,
 }
 
-#[derive(Default, Debug, Clone, PartialEq, Eq, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct NotesInfoResponse {
-    pub note_id: usize,
-    pub model_name: String,
-    pub tags: Vec<String>,
-    pub fields: HashMap<String, NotesInfoFieldsResponse>,
-}
-#[derive(Default, Debug, Clone, PartialEq, Eq, Deserialize)]
-pub struct NotesInfoFieldsResponse {
-    pub value: String,
-    pub order: usize,
-}
+impl AnkiRequest for DeleteNotesRequest {
+    type Response = ();
 
-impl AnkiRequest for NotesInfoRequest {
-    type Response = Vec<NotesInfoResponse>;
-
-    const ACTION: &'static str = "notesInfo";
+    const ACTION: &'static str = "deleteNotes";
     const VERSION: u8 = 6;
 }

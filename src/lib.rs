@@ -49,6 +49,8 @@ pub mod deck_actions;
 pub mod graphical_actions;
 /// Module containing statistic-related actions for `AnkiConnect`.
 pub mod miscellaneous_actions;
+/// Module containing model-related actions for `AnkiConnect`.
+pub mod model_actions;
 /// Module containing notes-related actions for `AnkiConnect`.
 pub mod notes_actions;
 /// Module containing statistic-related actions for `AnkiConnect`.

@@ -1,7 +1,7 @@
 /*
 * The MIT License (MIT)
 *
-* Copyright (c) 2023 VaiTon <eyadlorenzo.issa@studio.unibo.it>
+* Copyright (c) 2023 Codecrafter_404 <codecrafter_404@t-online.de>
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -21,33 +21,20 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-use serde::{Deserialize, Serialize};
+
 use std::collections::HashMap;
+
+use serde::Serialize;
 
 use crate::AnkiRequest;
 
+/// Parameters for the "modelNamesAndIds" action in `AnkiConnect`.
 #[derive(Default, Debug, Clone, PartialEq, Eq, Serialize)]
-pub struct NotesInfoRequest {
-    pub notes: Vec<usize>,
-}
+pub struct ModelNamesAndIdsRequest;
 
-#[derive(Default, Debug, Clone, PartialEq, Eq, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct NotesInfoResponse {
-    pub note_id: usize,
-    pub model_name: String,
-    pub tags: Vec<String>,
-    pub fields: HashMap<String, NotesInfoFieldsResponse>,
-}
-#[derive(Default, Debug, Clone, PartialEq, Eq, Deserialize)]
-pub struct NotesInfoFieldsResponse {
-    pub value: String,
-    pub order: usize,
-}
+impl AnkiRequest for ModelNamesAndIdsRequest {
+    type Response = HashMap<String, usize>;
 
-impl AnkiRequest for NotesInfoRequest {
-    type Response = Vec<NotesInfoResponse>;
-
-    const ACTION: &'static str = "notesInfo";
+    const ACTION: &'static str = "modelNamesAndIds";
     const VERSION: u8 = 6;
 }
