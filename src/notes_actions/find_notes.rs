@@ -31,7 +31,7 @@ pub struct FindNotesRequest {
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Eq, Deserialize)]
-pub struct FindNotesResponse(pub Vec<usize>);
+pub struct FindNotesResponse(pub Vec<u64>);
 
 impl AnkiRequest for FindNotesRequest {
     type Response = FindNotesResponse;

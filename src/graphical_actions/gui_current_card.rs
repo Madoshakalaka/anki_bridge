@@ -52,7 +52,7 @@ pub struct GuiCurrentCardResponse {
     /// The template of the current card.
     pub template: String,
     /// The ID of the current card.
-    pub card_id: usize,
+    pub card_id: u64,
     /// The buttons associated with the current card.
     pub buttons: Vec<isize>,
     /// The next reviews for the current card.

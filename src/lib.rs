@@ -130,7 +130,6 @@ impl<'a> AnkiClient<'a> {
 }
 
 impl<'a> Default for AnkiClient<'a> {
-    #[must_use]
     fn default() -> Self {
         Self::new("http://localhost:8765")
     }
@@ -141,9 +140,8 @@ pub trait AnkiRequestable<Request: AnkiRequest> {
     fn request(&self, params: Request) -> Result<Request::Response>;
 }
 
-#[maybe_async::async_impl]
-#[async_trait::async_trait]
-pub trait AnkiRequestable<Request: AnkiRequest + Send> {
+#[maybe_async::async_impl(?Send)]
+pub trait AnkiRequestable<Request: AnkiRequest> {
     async fn request(&self, params: Request) -> Result<Request::Response>;
 }
 
@@ -201,9 +199,8 @@ impl<'a, Request: AnkiRequest> AnkiRequestable<Request> for AnkiClient<'a> {
     }
 }
 
-#[maybe_async::async_impl]
-#[async_trait::async_trait]
-impl<'a, Request: AnkiRequest + Send + 'a> AnkiRequestable<Request> for AnkiClient<'a> {
+#[maybe_async::async_impl(?Send)]
+impl<'a, Request: AnkiRequest + 'a> AnkiRequestable<Request> for AnkiClient<'a> {
     async fn request(&self, params: Request) -> Result<Request::Response> {
         let json = params.to_json();
 

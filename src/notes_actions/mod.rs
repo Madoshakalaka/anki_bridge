@@ -27,3 +27,4 @@ pub mod delete_notes;
 pub mod find_notes;
 /// Returns a list of objects containing for each note ID the note fields, tags, note type and the cards belonging to the note.
 pub mod notes_info;
+pub mod update_note_fields;

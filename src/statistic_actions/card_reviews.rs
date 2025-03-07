@@ -30,22 +30,22 @@ use crate::AnkiRequest;
 /// Parameters for the "cardReviews" action.
 #[derive(Default, Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct CardReviewsRequest {
-    pub start: String,
+    pub deck: String,
     #[serde(rename = "startID")]
     pub start_id: usize,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Eq, Deserialize_tuple)]
 pub struct CardReviewsResponse {
-    review_time: usize,
-    card_id: usize,
-    usn: isize,
-    button_pressed: usize,
-    new_interval: isize,
-    previous_interval: isize,
-    new_factor: usize,
-    review_duration: usize,
-    review_type: usize,
+    pub review_time: usize,
+    pub card_id: usize,
+    pub usn: isize,
+    pub button_pressed: usize,
+    pub new_interval: isize,
+    pub previous_interval: isize,
+    pub new_factor: usize,
+    pub review_duration: usize,
+    pub review_type: usize,
 }
 
 impl AnkiRequest for CardReviewsRequest {

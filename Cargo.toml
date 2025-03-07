@@ -30,7 +30,7 @@ ureq_blocking = ["maybe-async/is_sync", "ureq"]
 [dependencies]
 async-trait = "0.1"
 maybe-async = { version = "0.2", optional = true, features = [] }
-reqwest = { version = "0.11", optional = true, default-features = false, features = ["json", "serde_json"] }
+reqwest = { version = "0.12", optional = true, default-features = false, features = ["json"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 serde_tuple = "0.5"

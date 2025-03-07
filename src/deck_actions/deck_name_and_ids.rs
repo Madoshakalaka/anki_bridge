@@ -35,6 +35,6 @@ pub struct DeckNamesAndIdsRequest;
 impl AnkiRequest for DeckNamesAndIdsRequest {
     type Response = HashMap<String, usize>;
 
-    const ACTION: &'static str = "deckNamesAndsIds";
+    const ACTION: &'static str = "deckNamesAndIds";
     const VERSION: u8 = 6;
 }

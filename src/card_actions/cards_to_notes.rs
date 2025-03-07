@@ -30,11 +30,11 @@ use crate::AnkiRequest;
 #[derive(Default, Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct CardsToNotesRequest {
     /// The card IDs for which to retrieve the corresponding note IDs.
-    pub cards: Vec<usize>,
+    pub cards: Vec<u64>,
 }
 
 impl AnkiRequest for CardsToNotesRequest {
-    type Response = Vec<usize>;
+    type Response = Vec<u64>;
 
     const ACTION: &'static str = "cardsToNotes";
     const VERSION: u8 = 6;

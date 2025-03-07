@@ -34,7 +34,7 @@ pub struct FindCardsRequest {
 }
 
 impl AnkiRequest for FindCardsRequest {
-    type Response = Vec<usize>;
+    type Response = Vec<u64>;
 
     const ACTION: &'static str = "findCards";
     const VERSION: u8 = 6;

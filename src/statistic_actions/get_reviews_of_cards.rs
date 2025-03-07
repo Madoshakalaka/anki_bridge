@@ -32,19 +32,19 @@ use crate::AnkiRequest;
 #[derive(Default, Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct GetReviewsOfCardsRequest {
     /// IDs of the cards to get reviews.
-    pub cards: Vec<usize>,
+    pub cards: Vec<u64>,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Eq, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetReviewsOfCardsResponse {
-    id: usize,
-    usn: usize,
-    ease: usize,
-    ivl: isize,
-    last_ivl: isize,
-    factor: usize,
-    time: usize,
+    pub id: u64,
+    pub usn: usize,
+    pub ease: usize,
+    pub ivl: isize,
+    pub last_ivl: isize,
+    pub factor: usize,
+    pub time: usize,
     #[serde(rename = "type")]
     type_: usize,
 }

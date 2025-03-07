@@ -28,7 +28,7 @@ use crate::AnkiRequest;
 
 #[derive(Default, Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct NotesInfoRequest {
-    pub notes: Vec<usize>,
+    pub notes: Vec<u64>,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Eq, Deserialize)]

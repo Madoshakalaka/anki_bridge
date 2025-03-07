@@ -27,8 +27,8 @@ use crate::{AnkiRequest, AnkiRequestable, Result};
 
 pub struct MockAnkiClient<Request, F>
 where
-    Request: AnkiRequest + Send,
-    F: FnOnce(Request) -> Result<Request::Response> + Send + Sync,
+    Request: AnkiRequest,
+    F: FnOnce(Request) -> Result<Request::Response>,
 {
     phantom: PhantomData<Request>,
     pub result: F,
@@ -58,12 +58,11 @@ where
     }
 }
 
-#[maybe_async::async_impl]
-#[async_trait::async_trait]
+#[maybe_async::async_impl(?Send)]
 impl<'a, Request, F> AnkiRequestable<Request> for MockAnkiClient<Request, F>
 where
-    Request: AnkiRequest + Send + Sync + 'a,
-    F: FnOnce(Request) -> Result<Request::Response> + Send + Sync + Copy,
+    Request: AnkiRequest  + 'a,
+    F: FnOnce(Request) -> Result<Request::Response> + Copy,
 {
     async fn request(&self, params: Request) -> Result<Request::Response> {
         (self.result)(params)
