@@ -45,8 +45,7 @@ pub struct GetReviewsOfCardsResponse {
     pub last_ivl: isize,
     pub factor: usize,
     pub time: usize,
-    #[serde(rename = "type")]
-    type_: usize,
+    pub r#type: usize,
 }
 
 impl AnkiRequest for GetReviewsOfCardsRequest {
