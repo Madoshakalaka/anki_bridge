@@ -22,7 +22,12 @@ pub struct UpdateNoteFields {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct NoteMedia {
-    pub url: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub url: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub path: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub data: Option<String>,
     pub filename: String,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub skip_hash: Option<String>,

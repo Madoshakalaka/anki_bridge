@@ -73,7 +73,7 @@ pub struct GetDeckConfigResponse {
     /// Timer setting.
     pub timer: usize,
     /// Update sequence number.
-    pub usn: isize,
+    pub usn: i64,
 }
 
 /// Configuration options for new cards in a deck.

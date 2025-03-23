@@ -34,7 +34,7 @@ pub struct NotesInfoRequest {
 #[derive(Default, Debug, Clone, PartialEq, Eq, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct NotesInfoResponse {
-    pub note_id: usize,
+    pub note_id: u64,
     pub model_name: String,
     pub tags: Vec<String>,
     pub fields: HashMap<String, NotesInfoFieldsResponse>,

@@ -75,7 +75,7 @@ pub struct SaveDeckConfig {
     /// Timer setting.
     pub timer: usize,
     /// Update sequence number.
-    pub usn: isize,
+    pub usn: i64,
 }
 
 /// Configuration options for saving new cards in a deck.

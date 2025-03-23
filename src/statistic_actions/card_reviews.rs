@@ -39,7 +39,7 @@ pub struct CardReviewsRequest {
 pub struct CardReviewsResponse {
     pub review_time: usize,
     pub card_id: usize,
-    pub usn: isize,
+    pub usn: i64,
     pub button_pressed: usize,
     pub new_interval: isize,
     pub previous_interval: isize,

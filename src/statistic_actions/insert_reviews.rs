@@ -38,7 +38,7 @@ pub struct InsertReviewsRequest {
 pub struct InsertReviewsData {
     review_time: usize,
     card_id: usize,
-    usn: isize,
+    usn: i64,
     button_pressed: usize,
     new_interval: isize,
     previous_interval: isize,

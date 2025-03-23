@@ -33,7 +33,7 @@ pub struct GetLatestReviewIDRequest {
 }
 
 impl AnkiRequest for GetLatestReviewIDRequest {
-    type Response = usize;
+    type Response = u64;
 
     const ACTION: &'static str = "getLatestReviewID";
     const VERSION: u8 = 6;

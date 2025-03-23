@@ -39,7 +39,7 @@ pub struct GetReviewsOfCardsRequest {
 #[serde(rename_all = "camelCase")]
 pub struct GetReviewsOfCardsResponse {
     pub id: u64,
-    pub usn: usize,
+    pub usn: i64,
     pub ease: usize,
     pub ivl: isize,
     pub last_ivl: isize,

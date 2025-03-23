@@ -30,7 +30,7 @@ use crate::AnkiRequest;
 #[derive(Default, Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct GuiEditNoteRequest {
     /// The ID of the note to edit.
-    pub note: usize,
+    pub note: u64,
 }
 
 impl AnkiRequest for GuiEditNoteRequest {
